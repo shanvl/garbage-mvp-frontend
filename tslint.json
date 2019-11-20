@@ -5,6 +5,7 @@
     "arrow-parens": false,
     "ban": false,
     "comment-format": [true, "check-space"],
+    "class-name": false,
     "eofline": false,
     "indent": [true, "spaces"],
     "interface-over-type-literal": false,
