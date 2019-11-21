@@ -11,11 +11,6 @@ export type Pupil = {
   resources: Resources;
 };
 
-export type Class = {
-  id: string;
-  resources: Resources;
-};
-
 export type Resources = {
   gadgets: number;
   paper: number;

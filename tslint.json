@@ -33,6 +33,7 @@
     "only-arrow-functions": false,
     "ordered-imports": false,
     "prefer-template": [true, "allow-single-concat"],
+    "prefer-const": false,
     "prefer-for-of": false,
     "quotemark": [true, "double", "jsx-double"],
     "semicolon": [true, "always"],

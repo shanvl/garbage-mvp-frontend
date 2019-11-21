@@ -3,8 +3,14 @@ import { sortBySelector, querySelector } from "../filters/selectors";
 import { SortBy } from "../filters/constants";
 import round from "../../utils/round";
 import { RootState } from "../../state/reducer";
-import { Pupil, Class, Resource } from "./reducer";
+import { Pupil, Resource, Resources } from "./reducer";
 import { Entities } from "../_types";
+import sortBy from "../../utils/sortBy";
+
+type Class = {
+  id: string;
+  resources: Resources;
+};
 
 export const stateSelector = (state: RootState) => state.pupils;
 
@@ -66,58 +72,36 @@ const filterClasses = (classes: Class[], query: string) => {
   });
 };
 
-export const sortPupils = (pupils: Pupil[], sortBy: SortBy) => {
-  switch (sortBy) {
+export const sortPupils = (pupils: Pupil[], sorting: SortBy) => {
+  switch (sorting) {
     case SortBy.GADGETS: {
-      return pupils.sort((first, second) => second.resources.gadgets - first.resources.gadgets);
+      return pupils.sort(sortBy(["resources.gadgets"]));
     }
     case SortBy.PLASTIC: {
-      return pupils.sort((first, second) => second.resources.plastic - first.resources.plastic);
+      return pupils.sort(sortBy(["resources.plastic"]));
     }
     case SortBy.PAPER: {
-      return pupils.sort((first, second) => second.resources.paper - first.resources.paper);
+      return pupils.sort(sortBy(["resources.paper"]));
     }
     default: {
-      return pupils.sort((first, second) => {
-        if (first.class.toLowerCase() < second.class.toLowerCase()) {
-          return -1;
-        }
-        if (first.class.toLowerCase() > second.class.toLowerCase()) {
-          return 1;
-        }
-        if (first.lastName.toLowerCase() < second.lastName.toLowerCase()) {
-          return -1;
-        }
-        if (first.lastName.toLowerCase() > second.lastName.toLowerCase()) {
-          return 1;
-        }
-        if (first.firstName.toLowerCase() < second.firstName.toLowerCase()) {
-          return -1;
-        }
-        if (first.firstName.toLowerCase() > second.firstName.toLowerCase()) {
-          return 1;
-        }
-        return 0;
-      });
+      return pupils.sort(sortBy(["class", "lastName", "firstName"]));
     }
   }
 };
 
-export const sortClasses = (classes: Class[], sortBy: SortBy) => {
-  switch (sortBy) {
+export const sortClasses = (classes: Class[], sorting: SortBy) => {
+  switch (sorting) {
     case SortBy.GADGETS: {
-      return classes.sort((first, second) => second.resources.gadgets - first.resources.gadgets);
+      return classes.sort(sortBy(["resources.gadgets"]));
     }
     case SortBy.PLASTIC: {
-      return classes.sort((first, second) => second.resources.plastic - first.resources.plastic);
+      return classes.sort(sortBy(["resources.plastic"]));
     }
     case SortBy.PAPER: {
-      return classes.sort((first, second) => second.resources.paper - first.resources.paper);
+      return classes.sort(sortBy(["resources.paper"]));
     }
     default: {
-      return classes.sort((first, second) => {
-        return first.id.toLowerCase() - second.id.toLowerCase();
-      });
+      return classes.sort(sortBy(["id"]));
     }
   }
 };
