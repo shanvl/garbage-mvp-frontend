@@ -1,9 +1,9 @@
-import React, { ReactText, FunctionComponent } from "react";
+import React, { ReactElement, FunctionComponent } from "react";
 import { Text, View, TouchableOpacity } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 
 export type OwnProps = {
-  children: ReactText;
+  children: ReactElement;
   onPress: () => void;
   style: EStyleSheet.AnyObject;
 };
