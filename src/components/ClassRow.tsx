@@ -1,32 +1,20 @@
 import React, { FunctionComponent } from "react";
 import { View, Text, TouchableHighlight } from "react-native";
-import { Icon } from "react-native-elements";
 import EStyleSheet from "react-native-extended-stylesheet";
 import Badge from "./Badge";
-import { Resources, Resource } from "../ducks/pupils/reducer";
+import { Resource, Resources } from "../ducks/pupils/reducer";
 
 export type OwnProps = {
   badgesOrder: Resource[];
-  class: string;
-  firstName: string;
+  id: string;
   height: number;
-  lastName: string;
-  onPress: () => void;
   resources: Resources;
   children?: never;
 };
 
 export type Props = OwnProps;
 
-const PupilRow: FunctionComponent<Props> = ({
-  resources,
-  badgesOrder,
-  firstName,
-  lastName,
-  onPress,
-  height,
-  class: className,
-}) => {
+const ClassRow: FunctionComponent<Props> = ({ id, height, badgesOrder, resources }) => {
   const renderBadges = () => {
     const badges: JSX.Element[] = [];
     Object.entries(resources).map(([type, amount]) => {
@@ -40,38 +28,28 @@ const PupilRow: FunctionComponent<Props> = ({
     return badges;
   };
 
-  let name = `${lastName} ${firstName}`;
-  name = name.length >= 25 ? name.slice(0, 22) + "..." : name;
-
   return (
-    <TouchableHighlight onPress={onPress} underlayColor={styles.$underlayColor}>
-      <View style={{ ...styles.container, height }}>
-        <View style={styles.classContainer}>
-          <Text style={styles.class}>{className}</Text>
-        </View>
-        <View style={styles.pupilInfo}>
-          <Text style={styles.name}>{name}</Text>
-          <View style={styles.badges}>{renderBadges()}</View>
-        </View>
-        <View style={styles.arrow}>
-          <Icon type="ionicon" name="ios-arrow-forward" size={26} color="#ccc" />
-        </View>
+    <View style={{ ...styles.container, height }}>
+      <View style={styles.classContainer}>
+        <Text style={styles.class}>{id}</Text>
       </View>
-    </TouchableHighlight>
+      <View style={styles.pupilInfo}>
+        <View style={styles.badges}>{renderBadges()}</View>
+      </View>
+    </View>
   );
 };
 
 const styles = EStyleSheet.create({
   $underlayColor: "$border",
-  arrow: {
-    marginLeft: "auto",
-  },
   badge: {
     marginRight: 5,
   },
   badges: {
+    width: "100%",
     flexDirection: "row",
-    justifyContent: "flex-start",
+    justifyContent: "center",
+    alignItems: "center",
   },
   classContainer: {
     backgroundColor: "$red",
@@ -101,4 +79,4 @@ const styles = EStyleSheet.create({
   },
 });
 
-export default React.memo(PupilRow);
+export default React.memo(ClassRow);

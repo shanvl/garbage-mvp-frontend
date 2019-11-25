@@ -55,7 +55,7 @@ const styles = EStyleSheet.create({
   },
 });
 
-export default connect<StateProps, DispatchProps, undefined, RootState>(
+export default connect<StateProps, DispatchProps, OwnProps, RootState>(
   state => ({
     pupils: pupilsSelector(state),
     loading: loadingSelector(state),

@@ -4,7 +4,7 @@ import EStyleSheet from "react-native-extended-stylesheet";
 import { connect } from "react-redux";
 import { pupilSelector } from "../ducks/pupils/selectors";
 import ResourceCard from "../components/ResourceCard";
-import { Resource, Pupil } from "../ducks/pupils/reducer";
+import { Resource, Pupil as PupilType } from "../ducks/pupils/reducer";
 import { RootState } from "../state/reducer";
 import { NavigationTabProp } from "react-navigation-tabs";
 
@@ -13,7 +13,7 @@ export type OwnProps = {
 };
 
 export type StateProps = {
-  pupil: Pupil;
+  pupil: PupilType;
 };
 
 export type Props = OwnProps & StateProps;

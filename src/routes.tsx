@@ -81,7 +81,7 @@ const MainStack = createStackNavigator(
         };
       } else {
         return {
-          title: null,
+          title: undefined,
           headerStyle: {
             elevation: 0,
             shadowOpacity: 0,

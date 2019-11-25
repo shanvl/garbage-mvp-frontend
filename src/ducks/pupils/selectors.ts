@@ -7,7 +7,7 @@ import { Pupil, Resource, Resources } from "./reducer";
 import { Entities } from "../_types";
 import sortBy from "../../utils/sortBy";
 
-type Class = {
+export type Class = {
   id: string;
   resources: Resources;
 };
@@ -44,7 +44,7 @@ export const filterPupils = (pupils: Pupil[], query: string) => {
   }
   query = query.toLowerCase();
   const queryArray = query.split(" ");
-  if (queryArray.length > 4) {
+  if (queryArray.length > 3) {
     return [];
   }
   return pupils.filter(pupil => {
@@ -75,13 +75,13 @@ const filterClasses = (classes: Class[], query: string) => {
 export const sortPupils = (pupils: Pupil[], sorting: SortBy) => {
   switch (sorting) {
     case SortBy.GADGETS: {
-      return pupils.sort(sortBy(["resources.gadgets"]));
+      return pupils.sort(sortBy(["resources.gadgets"], "des"));
     }
     case SortBy.PLASTIC: {
-      return pupils.sort(sortBy(["resources.plastic"]));
+      return pupils.sort(sortBy(["resources.plastic"], "des"));
     }
     case SortBy.PAPER: {
-      return pupils.sort(sortBy(["resources.paper"]));
+      return pupils.sort(sortBy(["resources.paper"], "des"));
     }
     default: {
       return pupils.sort(sortBy(["class", "lastName", "firstName"]));
