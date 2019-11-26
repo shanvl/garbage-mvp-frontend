@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useCallback } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { connect } from "react-redux";
 import { loadingSelector, classesSelector, Class } from "../ducks/pupils/selectors";
@@ -22,14 +22,10 @@ export type OwnProps = {
 
 export type Props = StateProps & DispatchProps & OwnProps;
 
-const Classes: FunctionComponent<Props> = ({ navigation, classes, loading, fetchAllPupils }) => {
-  const onListRowPress = (id: string) => {
-    navigation.navigate("ClassItem", { id });
-  };
-
+const Classes: FunctionComponent<Props> = ({ classes, loading, fetchAllPupils }) => {
   return (
     <View style={styles.container}>
-      <ClassesList classes={classes} loading={loading} onPull={fetchAllPupils} onRowPress={onListRowPress} />
+      <ClassesList classes={classes} loading={loading} onPull={fetchAllPupils} />
     </View>
   );
 };

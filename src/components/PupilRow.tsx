@@ -10,8 +10,9 @@ export type OwnProps = {
   class: string;
   firstName: string;
   height: number;
+  id: string;
   lastName: string;
-  onPress: () => void;
+  onPress: (id: string, name: string) => void;
   resources: Resources;
   children?: never;
 };
@@ -19,6 +20,7 @@ export type OwnProps = {
 export type Props = OwnProps;
 
 const PupilRow: FunctionComponent<Props> = ({
+  id,
   resources,
   badgesOrder,
   firstName,
@@ -44,7 +46,7 @@ const PupilRow: FunctionComponent<Props> = ({
   name = name.length >= 25 ? name.slice(0, 22) + "..." : name;
 
   return (
-    <TouchableHighlight onPress={onPress} underlayColor={styles.$underlayColor}>
+    <TouchableHighlight onPress={() => onPress(id, name)} underlayColor={styles.$underlayColor}>
       <View style={{ ...styles.container, height }}>
         <View style={styles.classContainer}>
           <Text style={styles.class}>{className}</Text>

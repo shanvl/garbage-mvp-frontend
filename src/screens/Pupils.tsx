@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useCallback } from "react";
 import { View, Text } from "react-native";
 import PupilsList from "../components/PupilsList";
 import { connect } from "react-redux";
@@ -25,9 +25,9 @@ export type StateProps = {
 export type Props = StateProps & DispatchProps & OwnProps;
 
 const Pupils: FunctionComponent<Props> = ({ pupils, loading, fetchAllPupils, navigation }) => {
-  const onListRowPress = (id: string, name: string) => {
+  const onListRowPress = useCallback((id: string, name: string) => {
     navigation.navigate("Pupil", { id, name });
-  };
+  },                                 []);
 
   return (
     <View style={styles.container}>

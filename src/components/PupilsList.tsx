@@ -1,9 +1,9 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useMemo, useCallback } from "react";
 import { FlatList } from "react-native";
 import PupilRow from "./PupilRow";
 import Separator from "./Separator";
 import { ActivityIndicator } from "react-native";
-import { Pupil } from "../ducks/pupils/reducer";
+import { Pupil, Resource } from "../ducks/pupils/reducer";
 
 const ROW_HEIGHT = 70;
 
@@ -17,6 +17,8 @@ export type OwnProps = {
 export type Props = OwnProps;
 
 const PupilsList: FunctionComponent<Props> = ({ pupils, loading, onPull, onRowPress }) => {
+  const badgesOrder: Resource[] = useMemo(() => ["plastic", "gadgets", "paper"], []);
+
   return (
     <FlatList
       style={styles.list}
@@ -37,14 +39,7 @@ const PupilsList: FunctionComponent<Props> = ({ pupils, loading, onPull, onRowPr
         }
       }}
       renderItem={({ item }) => {
-        return (
-          <PupilRow
-            onPress={() => onRowPress(item.id, `${item.lastName} ${item.firstName}`)}
-            {...item}
-            height={ROW_HEIGHT}
-            badgesOrder={["plastic", "gadgets", "paper"]}
-          />
-        );
+        return <PupilRow onPress={onRowPress} {...item} height={ROW_HEIGHT} badgesOrder={badgesOrder} />;
       }}
       refreshing={loading}
       onRefresh={onPull}

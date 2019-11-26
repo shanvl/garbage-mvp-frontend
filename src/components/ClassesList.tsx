@@ -1,9 +1,10 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useMemo } from "react";
 import { FlatList } from "react-native";
 import Separator from "./Separator";
 import { ActivityIndicator } from "react-native";
 import ClassRow from "./ClassRow";
 import { Class } from "../ducks/pupils/selectors";
+import { Resource } from "../ducks/pupils/reducer";
 
 const ROW_HEIGHT = 70;
 
@@ -11,12 +12,13 @@ export type OwnProps = {
   classes: Class[];
   loading: boolean;
   onPull: () => void;
-  onRowPress: (id: string) => void;
 };
 
 export type Props = OwnProps;
 
-const ClassesList: FunctionComponent<Props> = ({ classes, loading, onPull, onRowPress }) => {
+const ClassesList: FunctionComponent<Props> = ({ classes, loading, onPull }) => {
+  const badgesOrder: Resource[] = useMemo(() => ["plastic", "gadgets", "paper"], []);
+
   return (
     <FlatList
       style={styles.list}
@@ -37,7 +39,7 @@ const ClassesList: FunctionComponent<Props> = ({ classes, loading, onPull, onRow
         }
       }}
       renderItem={({ item }) => {
-        return <ClassRow {...item} height={ROW_HEIGHT} badgesOrder={["plastic", "gadgets", "paper"]} />;
+        return <ClassRow {...item} height={ROW_HEIGHT} badgesOrder={badgesOrder} />;
       }}
       refreshing={loading}
       onRefresh={onPull}
