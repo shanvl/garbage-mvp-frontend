@@ -33,7 +33,7 @@ const SearchInput: FunctionComponent<Props> = ({ query, navigation, changeQuery 
       <TextInput
         style={styles.input}
         autoCorrect={false}
-        autoFocus={true}
+        autoFocus={false}
         autoCapitalize="words"
         placeholder="ФИО или класc"
         value={query}
