@@ -12,13 +12,23 @@ import Pupils from "./screens/Pupils";
 import SearchInput from "./components/SearchInput";
 import BackArrow from "./components/BackArrow";
 
-const PupilsClassesStack = createBottomTabNavigator(
+export enum Routes {
+  CHANGE_RESOURCE = "changeResource",
+  CLASSES = "classes",
+  LISTS = "lists",
+  LISTS_WITH_SEARCH = "listsWithSearch",
+  LISTS_WITH_SEARCH_AND_FILTERS = "listsWithSearchAndFilters",
+  PUPIL = "pupil",
+  PUPILS = "pupils",
+}
+
+const ListsStack = createBottomTabNavigator(
   {
-    Pupils: Pupils,
-    Classes: Classes,
+    [Routes.PUPILS]: Pupils,
+    [Routes.CLASSES]: Classes,
   },
   {
-    initialRouteName: "Pupils",
+    initialRouteName: Routes.PUPILS,
     tabBarOptions: {
       labelStyle: {
         fontSize: 15,
@@ -32,17 +42,17 @@ const PupilsClassesStack = createBottomTabNavigator(
     defaultNavigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ tintColor }) => {
         const { routeName } = navigation.state;
-        const name = routeName === "Classes" ? "ios-list-box" : "ios-people";
-        const size = routeName === "Classes" ? 26 : 34;
+        const name = routeName === Routes.CLASSES ? "ios-list-box" : "ios-people";
+        const size = routeName === Routes.CLASSES ? 26 : 34;
         return <Icon name={name} type="ionicon" size={size} color={tintColor} />;
       },
     }),
   }
 );
 
-const SearchStack = createStackNavigator(
+const ListsWithSearchStack = createStackNavigator(
   {
-    PupilsClasses: PupilsClassesStack,
+    [Routes.LISTS]: ListsStack,
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
@@ -58,9 +68,9 @@ const SearchStack = createStackNavigator(
   }
 );
 
-const SearchFilterStack = createDrawerNavigator(
+const ListsWithSearchAndFiltersStack = createDrawerNavigator(
   {
-    Search: SearchStack,
+    [Routes.LISTS_WITH_SEARCH]: ListsWithSearchStack,
   },
   {
     contentComponent: Filters,
@@ -69,13 +79,13 @@ const SearchFilterStack = createDrawerNavigator(
 
 const MainStack = createStackNavigator(
   {
-    SearchFilter: SearchFilterStack,
-    Pupil: Pupil,
-    ChangeResource: ChangeResource,
+    [Routes.LISTS_WITH_SEARCH_AND_FILTERS]: ListsWithSearchAndFiltersStack,
+    [Routes.PUPIL]: Pupil,
+    [Routes.CHANGE_RESOURCE]: ChangeResource,
   },
   {
     defaultNavigationOptions: ({ navigation }) => {
-      if (navigation.state.routeName == "SearchFilter") {
+      if (navigation.state.routeName == Routes.LISTS_WITH_SEARCH_AND_FILTERS) {
         return {
           header: null,
         };

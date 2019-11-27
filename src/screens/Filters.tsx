@@ -9,7 +9,8 @@ import { sortBySelector } from "../ducks/filters/selectors";
 import Separator from "../components/Separator";
 import RESOURCES from "../styles/resources";
 import { SortBy } from "../ducks/filters/constants";
-import { NavigationDrawerProp } from "react-navigation-drawer";
+import { NavigationDrawerState } from "react-navigation-drawer";
+import { NavigationScreenProp } from "react-navigation";
 import { RootState } from "../state/reducer";
 
 export type IconProp = {
@@ -56,7 +57,7 @@ export type DispatchProps = {
 };
 
 export type OwnProps = {
-  navigation: NavigationDrawerProp;
+  navigation: NavigationScreenProp<NavigationDrawerState>;
 };
 
 export type StateProps = {

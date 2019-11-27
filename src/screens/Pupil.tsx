@@ -7,6 +7,7 @@ import ResourceCard from "../components/ResourceCard";
 import { Resource, Pupil as PupilType } from "../ducks/pupils/reducer";
 import { RootState } from "../state/reducer";
 import { NavigationTabProp } from "react-navigation-tabs";
+import { Routes } from "../routes";
 
 export type OwnProps = {
   navigation: NavigationTabProp;
@@ -20,7 +21,7 @@ export type Props = OwnProps & StateProps;
 
 const Pupil: FunctionComponent<Props> = ({ navigation, pupil }) => {
   const addResource = (type: Resource) => () => {
-    navigation.navigate("ChangeResource", {
+    navigation.navigate(Routes.CHANGE_RESOURCE, {
       type,
       action: "add",
       id: pupil.id,
@@ -29,7 +30,7 @@ const Pupil: FunctionComponent<Props> = ({ navigation, pupil }) => {
   };
 
   const subtractResource = (type: Resource) => () => {
-    navigation.navigate("ChangeResource", {
+    navigation.navigate(Routes.CHANGE_RESOURCE, {
       type,
       action: "subtract",
       id: pupil.id,

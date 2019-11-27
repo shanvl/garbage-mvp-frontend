@@ -8,6 +8,7 @@ import EStyleSheet from "react-native-extended-stylesheet";
 import { Pupil } from "../ducks/pupils/reducer";
 import { RootState } from "../state/reducer";
 import { NavigationTabProp } from "react-navigation-tabs";
+import { Routes } from "../routes";
 
 export type DispatchProps = {
   fetchAllPupils: typeof pupilsActions.fetchAllPupilsRequest;
@@ -26,7 +27,7 @@ export type Props = StateProps & DispatchProps & OwnProps;
 
 const Pupils: FunctionComponent<Props> = ({ pupils, loading, fetchAllPupils, navigation }) => {
   const onListRowPress = useCallback((id: string, name: string) => {
-    navigation.navigate("Pupil", { id, name });
+    navigation.navigate(Routes.PUPIL, { id, name });
   },                                 []);
 
   return (

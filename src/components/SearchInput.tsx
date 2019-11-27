@@ -5,8 +5,8 @@ import { Icon } from "react-native-elements";
 import { filtersActions } from "../ducks/filters/actions";
 import { connect } from "react-redux";
 import { querySelector } from "../ducks/filters/selectors";
-import { NavigationDrawerProp } from "react-navigation-drawer";
 import { RootState } from "../state/reducer";
+import { NavigationStackProp } from "react-navigation-stack";
 
 export type DispatchProps = {
   changeQuery: typeof filtersActions.changeQuery;
@@ -18,7 +18,7 @@ export type StateProps = {
 };
 
 export type OwnProps = {
-  navigation: NavigationDrawerProp;
+  navigation: NavigationStackProp;
 };
 
 export type Props = DispatchProps & OwnProps & StateProps;
