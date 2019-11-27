@@ -28,7 +28,7 @@ export type OwnProps = {
 export type Props = DispatchProps & OwnProps & StateProps;
 
 const ChangeResource: FunctionComponent<Props> = ({ navigation, addResource, subtractResource, loading }) => {
-  const [deltaString, setDeltaString] = useState<string>("");
+  let [deltaString, setDeltaString] = useState<string>("");
   const prevLoading = usePrevious(loading);
 
   useEffect(() => {
@@ -43,6 +43,9 @@ const ChangeResource: FunctionComponent<Props> = ({ navigation, addResource, sub
   const amount = navigation.getParam("amount");
 
   const onSubmit = (action: "add" | "subtract", type: Resource, amount: number, id: string) => () => {
+    // there might be a problem with the number string on a russian keyboard which puts
+    // "," instead of "."  as a digits delimiter
+    deltaString = deltaString.replace(",", ".");
     const delta = Number(deltaString) || 0;
 
     if (action === "add") {
@@ -125,3 +128,7 @@ export default connect<StateProps, DispatchProps, OwnProps, RootState>(
     subtractResource: pupilsActions.subtractResourceRequest,
   }
 )(ChangeResource);
+
+function replaceComma(numStr: string): string {
+  return numStr.replace(",", ".");
+}
