@@ -92,13 +92,13 @@ export const sortPupils = (pupils: Pupil[], sorting: SortBy) => {
 export const sortClasses = (classes: Class[], sorting: SortBy) => {
   switch (sorting) {
     case SortBy.GADGETS: {
-      return classes.sort(sortBy(["resources.gadgets"]));
+      return classes.sort(sortBy(["resources.gadgets"], "des"));
     }
     case SortBy.PLASTIC: {
-      return classes.sort(sortBy(["resources.plastic"]));
+      return classes.sort(sortBy(["resources.plastic"], "des"));
     }
     case SortBy.PAPER: {
-      return classes.sort(sortBy(["resources.paper"]));
+      return classes.sort(sortBy(["resources.paper"], "des"));
     }
     default: {
       return classes.sort(sortBy(["id"]));
