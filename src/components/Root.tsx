@@ -19,6 +19,6 @@ const Root: FunctionComponent<Props> = ({ fetchAllPupils }) => {
   return <AppWithNavigation />;
 };
 
-export default connect<undefined, DispatchProps, undefined, RootState>(null, {
+export default connect<{}, DispatchProps, {}, RootState>(null, {
   fetchAllPupils: pupilsActions.fetchAllPupilsRequest,
 })(Root);

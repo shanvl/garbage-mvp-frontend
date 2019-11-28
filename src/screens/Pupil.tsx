@@ -104,6 +104,6 @@ const styles = EStyleSheet.create({
   },
 });
 
-export default connect<StateProps, undefined, OwnProps, RootState>((state, ownProps) => ({
+export default connect<StateProps, {}, OwnProps, RootState>((state, ownProps) => ({
   pupil: pupilSelector(state, ownProps),
 }))(Pupil);

@@ -1,12 +1,21 @@
 import * as firebase from "firebase";
 
+import {
+  FIREBASE_API_KEY,
+  FIREBASE_MESSAGING_SENDER_ID,
+  FIREBASE_STORAGE_BUCKET,
+  FIREBASE_PROJECT_ID,
+  FIREBASE_DB_URL,
+  FIREBASE_AUTH_DOMAIN,
+} from "../../env";
+
 const config = {
-  apiKey: "AIzaSyAMT7dPaby4nVT8zvGqoEd5QiCqTyW2dQg",
-  authDomain: "plastic-82e9e.firebaseapp.com",
-  databaseURL: "https://plastic-82e9e.firebaseio.com",
-  projectId: "plastic-82e9e",
-  storageBucket: "plastic-82e9e.appspot.com",
-  messagingSenderId: "434986790177",
+  apiKey: FIREBASE_API_KEY,
+  authDomain: FIREBASE_AUTH_DOMAIN,
+  databaseURL: FIREBASE_DB_URL,
+  projectId: FIREBASE_PROJECT_ID,
+  storageBucket: FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: FIREBASE_MESSAGING_SENDER_ID,
 };
 
 firebase.initializeApp(config);
